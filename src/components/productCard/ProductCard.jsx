@@ -1,0 +1,33 @@
+import React from "react";
+import "../productsPage/products.css";
+import { Link } from "react-router-dom";
+
+export default function ProductCard({ id, name, price, image, rating }) {
+  return (
+    <Link to={id}>
+      <div className="products__productcard">
+        <div className="productcard__image">
+          <img src={image} alt="" width={250} height={250} />
+        </div>
+        <div className="productcard__info">
+          <p className="productcard__info__name" title={name}>
+            {name}
+          </p>
+          <div className="productcard__info__rating">
+            <div className="stars-empty__container">
+              <svg className="stars_empty">
+                <use href="./images/sprite.svg#stars"></use>
+              </svg>
+            </div>
+            <div className="stars-filled__container" style={{ width: `${rating * 20}%` }}>
+              <svg className="stars_filled">
+                <use href="./images/sprite.svg#stars"></use>
+              </svg>
+            </div>
+          </div>
+          <p className="productcard__info__price">{price} ₽</p>
+        </div>
+      </div>
+    </Link>
+  );
+}
