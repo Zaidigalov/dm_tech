@@ -14,7 +14,6 @@ export default function App() {
 
   useEffect(() => {
     dispatch(getCart());
-    //console.log("render App, get cart");
   }, []);
 
   return (

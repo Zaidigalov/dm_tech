@@ -1,7 +1,15 @@
-.orders {
+.orders__container {
 	max-width: 1340px;
+	height: 100%;
+	width: 100%;
 	padding: 0 30px;
 	margin: auto;
+	margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 1;
+
 }
 
 .orders__item {
@@ -23,6 +31,25 @@
 
 .order-item__order-number {
 	font-size: 20px;
+}
+
+.order-item__images {
+	display: flex;
+	max-height: 48px;
+	height: 100%;
+	gap: 8px;
+}
+
+.order-item__image {
+	max-width: 48px;
+	width: 100%;
+	height: 100%;
+}
+
+.order-item__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .order-item__info {

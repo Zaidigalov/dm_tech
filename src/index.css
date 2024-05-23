@@ -30,6 +30,8 @@ body {
 	margin: auto;
 	padding: 0 32px;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .button {

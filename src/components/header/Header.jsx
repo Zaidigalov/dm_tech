@@ -30,7 +30,7 @@ export default function Header() {
           <NavLink to="/" className={setActive}>
             Товары
           </NavLink>
-          <NavLink to="/orders" className={setActive}>
+          <NavLink to="/orders?page=1" className={setActive}>
             Заказы
           </NavLink>
         </nav>

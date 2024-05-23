@@ -38,6 +38,9 @@ export default function ProductCardMain() {
 
   useEffect(() => {
     getProduct();
+  }, []);
+
+  useEffect(() => {
     let currentProduct = cart.find((product) => product.product.id === id);
     setIsCounterVisible(currentProduct ? currentProduct.quantity : 0);
   }, [cart]);
