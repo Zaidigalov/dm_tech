@@ -8,6 +8,7 @@ import ProductCardMain from "./components/productCardMain/ProductCardMain.jsx";
 import NotFoundPage from "./components/NotFoundPage.jsx";
 import Layout from "./components/layout/Layout";
 import { getCart } from "./store/cartSlise.js";
+import Cart from "./components/cart/Cart.jsx";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<ProductsPage />}></Route>
           <Route path="orders" element={<OrdersPage />}></Route>
+          <Route path="cart" element={<Cart />}></Route>
           <Route path=":id" element={<ProductCardMain />}></Route>
           <Route path="/not-found" element={<NotFoundPage />}></Route>
         </Route>

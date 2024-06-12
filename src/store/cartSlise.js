@@ -16,14 +16,6 @@ export const getCart = createAsyncThunk("cart/getCart", async () => {
 export const updateCart = createAsyncThunk(
   "cart/updateCart",
   async (products, { dispatch }) => {
-    console.log("Новый состав корзины", {
-      data: products.map((item) => {
-        return {
-          id: item.product.id,
-          quantity: item.quantity,
-        };
-      }),
-    });
     try {
       const response = await fetch(
         `https://skillfactory-task.detmir.team/cart/update`,
@@ -45,7 +37,7 @@ export const updateCart = createAsyncThunk(
 
       if (response.ok) {
         dispatch(updateStateCart({ products }));
-        console.log("updated cart", data);
+        //console.log("updated cart", data);
       } else {
         products.pop();
         dispatch(updateStateCart({ products }));

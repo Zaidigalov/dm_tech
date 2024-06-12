@@ -15,12 +15,15 @@ export default function ProductCard({ id, name, price, image, rating }) {
           </p>
           <div className="productcard__info__rating">
             <div className="stars-empty__container">
-              <svg className="stars_empty">
+              <svg className="stars_empty stars-icon">
                 <use href="./images/sprite.svg#stars"></use>
               </svg>
             </div>
-            <div className="stars-filled__container" style={{ width: `${rating * 20}%` }}>
-              <svg className="stars_filled">
+            <div
+              className="stars-filled__container"
+              style={{ width: `${rating * 20}%` }}
+            >
+              <svg className="stars_filled stars-icon">
                 <use href="./images/sprite.svg#stars"></use>
               </svg>
             </div>

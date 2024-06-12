@@ -14,14 +14,18 @@ export default function OrdersPage() {
   const orders = useSelector((state) => state.orders.orders);
   const total = useSelector((state) => state.orders.total);
   const visitedPages = useSelector((state) => state.orders.visitedPages);
-  const itemsOnPage = 1;
+  const itemsOnPage = 7;
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!visitedPages.includes(page))
-      dispatch(getOrders({ page, itemsOnPage }));
-  }, [dispatch, page]);
+  useEffect(
+    () => {
+      if (!visitedPages.includes(page))
+        dispatch(getOrders({ page, itemsOnPage }));
+    },
+    [dispatch, page],
+    visitedPages
+  );
 
   function pageChangeHandler({ selected }) {
     setPage(selected + 1);
@@ -30,48 +34,55 @@ export default function OrdersPage() {
 
   return (
     <div className="orders__container">
-      <div className="orders">
-        {orders.length &&
-          orders.find((order) => order.page === page) &&
-          orders
-            .find((order) => order.page === page)
-            .data.data.map((order, index) => {
-              return (
-                <OrderItem key={index} order={order} orderNumber={index} />
-              );
-            })}
-      </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel={
-          <svg>
-            <use href="../images/sprite.svg#icon-arrow-right"></use>
-          </svg>
-        }
-        previousLabel={
-          <svg>
-            <use href="../images/sprite.svg#icon-arrow-left"></use>
-          </svg>
-        }
-        onPageChange={pageChangeHandler}
-        pageRangeDisplayed={1}
-        marginPagesDisplayed={2}
-        pageCount={Math.ceil(total / itemsOnPage)}
-        initialPage={startPage - 1}
-        renderOnZeroPageCount={null}
-        containerClassName="pagination"
-        activeClassName="pagination__item_active"
-        breakClassName="pagination__item"
-        pageClassName="pagination__item"
-        previousClassName="pagination__item"
-        nextClassName="pagination__item"
-        disabledClassName="pagination__item_disabled"
-        activeLinkClassName="pagination-item__link"
-        breakLinkClassName="pagination-item__link"
-        pageLinkClassName="pagination-item__link"
-        previousLinkClassName="pagination-item__link"
-        nextLinkClassName="pagination-item__link"
-      />
+      {total !== 0 ? (
+        <div className="orders">
+          {orders.length &&
+            orders.find((order) => order.page === page) &&
+            orders
+              .find((order) => order.page === page)
+              .data.data.map((order, index) => {
+                return (
+                  <OrderItem key={index} order={order} orderNumber={index} />
+                );
+              })}
+        </div>
+      ) : (
+        <p className="orders__empty">Вы еще не сделали ни одного заказа</p>
+      )}
+
+      {total > itemsOnPage && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel={
+            <svg>
+              <use href="../images/sprite.svg#icon-arrow-right"></use>
+            </svg>
+          }
+          previousLabel={
+            <svg>
+              <use href="../images/sprite.svg#icon-arrow-left"></use>
+            </svg>
+          }
+          onPageChange={pageChangeHandler}
+          pageRangeDisplayed={1}
+          marginPagesDisplayed={2}
+          pageCount={Math.ceil(total / itemsOnPage)}
+          initialPage={startPage - 1}
+          renderOnZeroPageCount={null}
+          containerClassName="pagination"
+          activeClassName="pagination__item_active"
+          breakClassName="pagination__item"
+          pageClassName="pagination__item"
+          previousClassName="pagination__item"
+          nextClassName="pagination__item"
+          disabledClassName="pagination__item_disabled"
+          activeLinkClassName="pagination-item__link"
+          breakLinkClassName="pagination-item__link"
+          pageLinkClassName="pagination-item__link"
+          previousLinkClassName="pagination-item__link"
+          nextLinkClassName="pagination-item__link"
+        />
+      )}
     </div>
   );
 }

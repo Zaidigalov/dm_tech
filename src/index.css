@@ -34,6 +34,13 @@ body {
 	flex-direction: column;
 }
 
+@media screen and (width < 648px) {
+
+	.main {
+		padding: 0 10px;
+	}
+}
+
 .button {
 	border: none;
 	background-color: var(--blue);
@@ -61,6 +68,7 @@ body {
 	background-color: var(--button-disabled);
 	cursor: default;
 }
+
 
 
 .counter {

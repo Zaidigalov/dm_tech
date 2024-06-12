@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../cart/cart.css";
 import CartItem from "./CartItem";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCart, getCart } from "../../store/cartSlise";
+import { submitOrders } from "../../store/ordersSlise";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const sum = useSelector((state) => state.cart.sum);
-  // console.log("sum", sum);
   const cart = useSelector((state) => state.cart.products);
-  // console.log("cart", cart);
 
   return (
     <section className="cart">
@@ -35,7 +33,13 @@ export default function Cart() {
               ₽
             </p>
           </div>
-          <button className="cart__button button" disabled={sum > 10000}>
+          <button
+            className="cart__button button"
+            disabled={sum > 10000}
+            onClick={() => {
+              dispatch(submitOrders(cart));
+            }}
+          >
             Оформить заказ
           </button>
         </>

@@ -55,6 +55,7 @@ export default function ProductCardMain() {
         throw new Error(`HTTP error! status: ${data.status}`);
       }
       const response = await data.json();
+      const date = String(new Date());
 
       const NewProduct = {
         product: {
@@ -67,7 +68,7 @@ export default function ProductCardMain() {
           category: response.category,
         },
         quantity: 1,
-        createdAt: "2024-05-20T17:27:07.595Z",
+        createdAt: date,
       };
 
       setProduct(NewProduct);
@@ -84,7 +85,6 @@ export default function ProductCardMain() {
     toggleCounter();
     dispatch(addToCart({ product }));
     const products = [...cart, product];
-
     dispatch(updateCart(products));
   }
 
@@ -160,6 +160,9 @@ export default function ProductCardMain() {
                   )}
                 </div>
                 <div className="product__main__info__return">
+                  <svg>
+                    <use href="../images/sprite.svg#icon-arrow-return"></use>
+                  </svg>
                   <h3>Условия возврата</h3>
                   <p>
                     Обменять или вернуть товар надлежащего качества можно в

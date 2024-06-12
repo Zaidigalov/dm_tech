@@ -4,7 +4,7 @@ import { cleanCart, cleanStateCart } from "./cartSlise";
 export const getOrders = createAsyncThunk(
   "orders/getOrders",
   async ({ page, itemsOnPage }, { dispatch }) => {
-    console.log("get orders");
+    //console.log("get orders");
     try {
       const response = await fetch(
         `https://skillfactory-task.detmir.team/orders?page=${page}&limit=${itemsOnPage}`,
@@ -46,6 +46,7 @@ export const submitOrders = createAsyncThunk(
         dispatch(cleanStateCart());
         console.log("CLEAN");
         dispatch(cleanCart());
+        dispatch(cleanOrdersState());
       }
 
       return data;
@@ -64,7 +65,6 @@ const orderSlice = createSlice({
   },
   reducers: {
     stateOrders: (state, action) => {
-      console.log("orders 2", action.payload);
       state.orders.push(action.payload);
       state.total = action.payload.data.meta.total;
     },
@@ -73,17 +73,13 @@ const orderSlice = createSlice({
         state.visitedPages.push(action.payload.page);
       }
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getOrders.fulfilled, (state, action) => {
-        //console.log("get orders payload", action.payload);
-      })
-      .addCase(submitOrders.fulfilled, (state, action) => {
-        //console.log("sumbit payload", action.payload);
-      });
+    cleanOrdersState: (state, action) => {
+      state.orders = [];
+      state.total = 0;
+      state.visitedPages = [];
+    },
   },
 });
 
-const { stateOrders, rememberPage } = orderSlice.actions;
+const { stateOrders, rememberPage, cleanOrdersState } = orderSlice.actions;
 export default orderSlice.reducer;

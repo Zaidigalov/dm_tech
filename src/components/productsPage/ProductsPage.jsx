@@ -17,8 +17,6 @@ export default function ProductsPage() {
   const isFirstRender = useRef(true);
 
   const dispatch = useDispatch();
-  //const [products, setProducts] = useState(allProducts);
-  //const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(stateFetching);
   const [totalProducts, setTotalProducts] = useState(stateTotalProducts);
 
@@ -74,11 +72,8 @@ export default function ProductsPage() {
   }
 
   useEffect(() => {
-    if (!isFirstRender.current) {
-      window.scrollTo(0, scrollPosition);
-    }
-    isFirstRender.current = false;
-  }, [scrollPosition]);
+    window.scrollTo(0, scrollPosition);
+  }, []);
 
   return (
     <div className="products">

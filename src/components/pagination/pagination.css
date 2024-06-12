@@ -33,7 +33,7 @@
 	background-color: #cfe4fa;
 }
 
-.pagination__item:active,
+.pagination__item:active:not(.pagination__item_disabled),
 .pagination__item_active {
 	background-color: var(--blue);
 	color: white;
